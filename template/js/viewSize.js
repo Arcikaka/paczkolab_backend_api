@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var url = '../../router.php/size/',
         viewSize = $('#view-size');
 
@@ -6,29 +6,30 @@ $(document).ready(function() {
     function loadSizeView() {
 
         $.ajax({
-                type: 'GET',
+            type: 'GET',
             url: url,
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (response) {
             insertContentSize(response);
         }).fail(function (response) {
-            alert( "Wystąpił błąd");
+            alert("Wystąpił błąd");
         });
     }
+
     loadSizeView();
 
     // SIZE
     // Create table element to put database inside
     // Do action (edit, delete) on data in table
     function insertContentSize(size) {
-        $.each(size, function(){
+        $.each(size, function () {
             var tr = $('<tr>'),
                 tdId = $('<td>', {class: "id"}),
                 tdSize = $('<td>', {class: "size"}),
                 tdPrice = $('<td>', {class: "price"}),
                 tdAction = $('<td>', {class: "action"}),
-                    actionDelete = $('<button>', {class: "delete-btn"}).text('Usuń'),
+                actionDelete = $('<button>', {class: "delete-btn"}).text('Usuń'),
                 actionEdit = $('<button>', {class: "edit-btn"}).text('Edytuj'),
                 actionForm = $('<form>', {class: "edit-form hide"}),
                 inputSize = $('<input>', {name: "size", id: "size"}),
@@ -48,8 +49,8 @@ $(document).ready(function() {
         });
 
         // ACTION - Edit SIZE data
-        viewSize.on('click', '.edit-btn', function(){
-        
+        viewSize.on('click', '.edit-btn', function () {
+
             var editForm = $(this).next('form');
             var edit = $(this).next('form').find('input[type=submit]');
 
@@ -59,11 +60,11 @@ $(document).ready(function() {
             var id = parent.find('td[class=id]').text();
             var sizeValue = parent.find('td[class=size]').text();
             var priceValue = parent.find('td[class=price]').text();
-            
+
             editForm.children('input[name=size]').val(sizeValue);
             editForm.children('input[name=price]').val(priceValue);
-            
-            edit.on('click', function(e){
+
+            edit.on('click', function (e) {
                 e.preventDefault();
 
                 var size = $(this).siblings('#size').val();
@@ -82,15 +83,15 @@ $(document).ready(function() {
                     alert('Rozmiar został zaktualizowany');
                     location.reload();
                 }).fail(function () {
-                    alert( "Wystąpił błąd");
+                    alert("Wystąpił błąd");
                 });
             });
         });
 
         // ACTION - Delete SIZE data
-        viewSize.on('click', '.delete-btn', function(e){
+        viewSize.on('click', '.delete-btn', function (e) {
             e.preventDefault();
-        
+
             var id = $(this).parent().parent().find('td[class=id]').text();
             $.ajax({
                 type: "DELETE",
@@ -103,9 +104,9 @@ $(document).ready(function() {
                 alert('Rozmiar zostanie usunięty');
                 location.reload();
             }).fail(function (response) {
-                alert( "Wystąpił błąd");
+                alert("Wystąpił błąd");
             });
-           
+
         });
     }
 });
