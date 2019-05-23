@@ -1,6 +1,6 @@
 <?php
 
-class Address implements Action,JsonSerializable
+class Address implements Action, JsonSerializable
 {
     /**
      * @var Database
@@ -27,43 +27,87 @@ class Address implements Action,JsonSerializable
      */
     private $flat;
 
+    public function __construct()
+    {
+        $this->id = -1;
+    }
 
     public function save()
     {
         self::$db->query("INSERT INTO Address SET city=:city, code=:code, street=:street, flat=:flat");
-        self::$db->bind('city', $this->size);
-        self::$db->bind('price', $this->price);
-        self::$db->execute();    }
+        self::$db->bind('city', $this->city);
+        self::$db->bind('code', $this->code);
+        self::$db->bind('street', $this->street);
+        self::$db->bind('flat', $this->flat);
+        self::$db->execute();
+    }
 
     public function update()
     {
-        // TODO: Implement update() method.
+        self::$db->query("UPDATE Address SET city=:city, code=:code, street=:street, flat=:flat WHERE  id=:id");
+        self::$db->bind('id', $this->id);
+        self::$db->bind('city', $this->city);
+        self::$db->bind('code', $this->code);
+        self::$db->bind('street', $this->street);
+        self::$db->bind('flat', $this->flat);
+        self::$db->execute();
     }
 
     public function delete()
     {
-        // TODO: Implement delete() method.
+        self::$db->query("DELETE FROM Address WHERE id = :id");
+        self::$db->bind('id', $this->id);
+        self::$db->execute();
     }
 
     public static function load($id = null)
     {
-        // TODO: Implement load() method.
+        if ($id == null) {
+            return self::loadAll();
+        }
+        self::$db->query("SELECT * FROM Address WHERE id=:id");
+        self::$db->bind('id', $id);
+        $row = self::$db->single();
+
+
+        $address = new Address();
+        $address->id = $row['id'];
+        $address->city = $row['city'];
+        $address->code = $row['code'];
+        $address->street = $row['street'];
+        $address->flat = $row['flat'];
+        return $address;
     }
 
     public static function loadAll()
     {
-        // TODO: Implement loadAll() method.
+        //wywolujemy metody z klasy DBmysql poniewaz to ona jest nakladka na PDO i ma odpowiednia implementacje metod PDO
+        self::$db->query("SELECT * FROM Address");
+        $addresses = self::$db->resultSet();//to jest tablica z wierszami Size z bazy
+        $result = [];
+        foreach ($addresses as $address) {
+            $new = new Address();
+            $new->id = $address['id'];
+            $new->city = $address['city'];
+            $new->code = $address['code'];
+            $new->street = $address['street'];
+            $new->flat = $address['flat'];
+            $result[] = $new;
+        }
+        return $result;
     }
 
-    public static function setDb(Database $db)
+    public
+    static function setDb(Database $db)
     {
-        // TODO: Implement setDb() method.
+        self::$db = $db;
     }
 
     /**
      * @return string
      */
-    public function getCity()
+    public
+    function getCity()
     {
         return $this->city;
     }
@@ -71,7 +115,8 @@ class Address implements Action,JsonSerializable
     /**
      * @param string $city
      */
-    public function setCity($city)
+    public
+    function setCity($city)
     {
         $this->city = $city;
     }
@@ -79,7 +124,8 @@ class Address implements Action,JsonSerializable
     /**
      * @return string
      */
-    public function getCode()
+    public
+    function getCode()
     {
         return $this->code;
     }
@@ -87,7 +133,8 @@ class Address implements Action,JsonSerializable
     /**
      * @param string $code
      */
-    public function setCode($code)
+    public
+    function setCode($code)
     {
         $this->code = $code;
     }
@@ -95,7 +142,8 @@ class Address implements Action,JsonSerializable
     /**
      * @return string
      */
-    public function getStreet()
+    public
+    function getStreet()
     {
         return $this->street;
     }
@@ -103,7 +151,8 @@ class Address implements Action,JsonSerializable
     /**
      * @param string $street
      */
-    public function setStreet($street)
+    public
+    function setStreet($street)
     {
         $this->street = $street;
     }
@@ -111,7 +160,8 @@ class Address implements Action,JsonSerializable
     /**
      * @return string
      */
-    public function getFlat()
+    public
+    function getFlat()
     {
         return $this->flat;
     }
@@ -119,7 +169,8 @@ class Address implements Action,JsonSerializable
     /**
      * @param string $flat
      */
-    public function setFlat($flat)
+    public
+    function setFlat($flat)
     {
         $this->flat = $flat;
     }
@@ -131,11 +182,15 @@ class Address implements Action,JsonSerializable
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    public function jsonSerialize()
+    public
+    function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
-        /**
-         * @TODO
-         */
+        return [
+            'id' => $this->id,
+            'city' => $this->city,
+            'code' => $this->code,
+            'street' => $this->street,
+            'flat' => $this->flat
+        ];
     }
 }
