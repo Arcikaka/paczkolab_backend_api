@@ -100,7 +100,12 @@ class Parcel implements Action, JsonSerializable
      */
     public function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+        return [
+            'id' => $this->id,
+            'userId' => $this->userId,
+            'sizeId' => $this->sizeId,
+            'addressId' => $this->addressId
+        ];
     }
 
     /**
