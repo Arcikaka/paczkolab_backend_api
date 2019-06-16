@@ -40,6 +40,8 @@ class Address implements Action, JsonSerializable
         self::$db->bind('street', $this->street);
         self::$db->bind('flat', $this->flat);
         self::$db->execute();
+
+        $this->id = self::$db->lastInsertId();
     }
 
     public function update()
@@ -192,5 +194,13 @@ class Address implements Action, JsonSerializable
             'street' => $this->street,
             'flat' => $this->flat
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

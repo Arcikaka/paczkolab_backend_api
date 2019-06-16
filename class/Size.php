@@ -33,6 +33,9 @@ class Size implements Action, JsonSerializable
         self::$db->bind('size', $this->size);
         self::$db->bind('price', $this->price);
         self::$db->execute();
+
+        $this->id = self::$db->lastInsertId();
+
     }
 
     public function update()
@@ -49,6 +52,7 @@ class Size implements Action, JsonSerializable
         self::$db->query("DELETE FROM Size WHERE id = :id");
         self::$db->bind('id', $this->id);
         self::$db->execute();
+
     }
 
     public static function load($id = null)
@@ -136,5 +140,13 @@ class Size implements Action, JsonSerializable
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

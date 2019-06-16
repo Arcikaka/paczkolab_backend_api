@@ -31,6 +31,7 @@ class Parcel implements Action, JsonSerializable
         self::$db->bind('sizeId', $this->sizeId);
         self::$db->bind('addressId', $this->addressId);
         self::$db->execute();
+        $this->id = self::$db->lastInsertId();
     }
 
     public function update()
@@ -111,7 +112,7 @@ class Parcel implements Action, JsonSerializable
     /**
      * @return int
      */
-    public function getSizeId(): int
+    public function getSizeId()
     {
         return $this->sizeId;
     }
@@ -127,7 +128,7 @@ class Parcel implements Action, JsonSerializable
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getUserId()
     {
         return $this->userId;
     }
@@ -143,7 +144,7 @@ class Parcel implements Action, JsonSerializable
     /**
      * @return int
      */
-    public function getAddressId(): int
+    public function getAddressId()
     {
         return $this->addressId;
     }
@@ -154,5 +155,13 @@ class Parcel implements Action, JsonSerializable
     public function setAddressId(int $addressId): void
     {
         $this->addressId = $addressId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

@@ -35,6 +35,8 @@ class User implements Action, JsonSerializable
         self::$db->bind('credits', $this->credits);
         self::$db->bind('addressId', $this->addressId);
         self::$db->execute();
+
+        $this->id = self::$db->lastInsertId();
     }
 
     public function update()
@@ -118,7 +120,7 @@ class User implements Action, JsonSerializable
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -126,7 +128,7 @@ class User implements Action, JsonSerializable
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(string $name):void
     {
         $this->name = $name;
     }
@@ -134,7 +136,7 @@ class User implements Action, JsonSerializable
     /**
      * @return string
      */
-    public function getSurname(): string
+    public function getSurname()
     {
         return $this->surname;
     }
@@ -150,7 +152,7 @@ class User implements Action, JsonSerializable
     /**
      * @return int
      */
-    public function getCredits(): int
+    public function getCredits()
     {
         return $this->credits;
     }
@@ -166,7 +168,7 @@ class User implements Action, JsonSerializable
     /**
      * @return int
      */
-    public function getAddressId(): int
+    public function getAddressId()
     {
         return $this->addressId;
     }
