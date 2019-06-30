@@ -35,7 +35,7 @@ class userTest extends TestCase
      */
     protected function getDataSet()
     {
-        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test_2.xml');
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test.xml');
     }
 
     public function setUp()
@@ -51,7 +51,7 @@ class userTest extends TestCase
         $user->setName('Andrzej');
         $user->setSurname('Sapkowski');
         $user->setCredits(20.00);
-        $user->setAddressId(3);
+        $user->setAddressId(1);
         $user->save();
 
         $userTest = User::load(2);
@@ -98,12 +98,12 @@ class userTest extends TestCase
         $this->assertEquals('Andrzej',$user2->getName());
         $this->assertEquals('Sapkowski',$user2->getSurname());
         $this->assertEquals(22.00,$user2->getCredits());
-        $this->assertEquals(3,$user2->getAddressId());
-
+        $this->assertEquals(1,$user2->getAddressId());
     }
 
     public function testDeleteUser()
     {
+        $this->markTestIncomplete();
         $user = User::load(2);
         $user->delete();
 
@@ -115,6 +115,4 @@ class userTest extends TestCase
         $this->assertNotEquals($user->getAddressId(),$userTest->getAddressId());
 
     }
-
-
 }

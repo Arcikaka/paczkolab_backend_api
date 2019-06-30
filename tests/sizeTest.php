@@ -34,7 +34,7 @@ class sizeTest extends TestCase
      */
     protected function getDataSet()
     {
-        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test_2.xml');
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test.xml');
     }
 
     public function setUp()
@@ -51,49 +51,12 @@ class sizeTest extends TestCase
         $size->setPrice(24);
         $size->save();
 
-        $sizeTest = Size::load($size->getId());
+        $sizeTest = Size::load(3);
 
         $this->assertEquals($size->getSize(), $sizeTest->getSize());
         $this->assertEquals($size->getPrice(), $sizeTest->getPrice());
 
     }
-
-    public function testDelete()
-    {
-        $this->markTestIncomplete();
-        $size = new Size();
-        $size->setSize('MX');
-        $size->setPrice(26);
-        $size->save();
-
-        $sizeToDelete = Size::load($size->getId());
-
-        $sizeToDelete->delete();
-
-        $sizeTest = Size::load($size->getId());
-
-
-        $this->assertNotEquals($size->getSize(), $sizeTest->getSize());
-        $this->assertNotEquals($size->getPrice(), $sizeTest->getPrice());
-    }
-
-    public function testUpdateSize()
-    {
-        $this->markTestIncomplete();
-        $id = $this->getConnection()->getConnection()->lastInsertId();
-        $size = Size::load($id);
-        $size->setSize('X');
-        $size->setPrice(20);
-        $size->update();
-
-
-        $sizeTest = Size::load($id);
-
-        $this->assertEquals($size->getPrice(),$sizeTest->getPrice());
-        $this->assertEquals($size->getSize(),$sizeTest->getSize());
-
-    }
-
 
     public function testLoadSize()
     {
@@ -104,13 +67,45 @@ class sizeTest extends TestCase
 
     }
 
+    public function testUpdateSize()
+    {
+        $size = Size::load(3);
+        $size->setSize('X');
+        $size->setPrice(20);
+        $size->update();
+
+
+        $sizeTest = Size::load(3);
+
+        $this->assertEquals($size->getPrice(),$sizeTest->getPrice());
+        $this->assertEquals($size->getSize(),$sizeTest->getSize());
+
+    }
+
+    public function testDelete()
+    {
+
+        $size = Size::load(3);
+
+        $size->delete();
+
+        $sizeTest = Size::load(3);
+
+
+        $this->assertNotSame($size,$sizeTest);
+    }
+
     public function testLoadAllSize()
     {
         $sizes = Size::loadAll();
         $size = $sizes[0];
+        $size2 = $sizes[1];
 
         $this->assertEquals('S',$size->getSize());
         $this->assertEquals(8.00,$size->getPrice());
+        $this->assertEquals('M',$size2->getSize());
+        $this->assertEquals(12.00,$size2->getPrice());
+
 
     }
 }

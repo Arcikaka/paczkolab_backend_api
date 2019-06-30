@@ -34,7 +34,7 @@ class addressTest extends TestCase
      */
     protected function getDataSet()
     {
-        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test_2.xml');
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test.xml');
     }
 
     public function setUp()
@@ -65,11 +65,11 @@ class addressTest extends TestCase
     }
     public function testUpdateAddress()
     {
-        $address = Address::load(3);
+        $address = Address::load(2);
         $address->setCity('Novigrad');
         $address->update();
 
-        $addressTest = Address::load(3);
+        $addressTest = Address::load(2);
 
         $this->assertEquals($address->getCity(),$addressTest->getCity());
 
@@ -95,7 +95,7 @@ class addressTest extends TestCase
     }
     public function testLoadAddressById()
     {
-        $address = Address::load(2);
+        $address = Address::load(1);
 
         $this->assertEquals('Poznan',$address->getCity());
         $this->assertEquals('62-100',$address->getCode());

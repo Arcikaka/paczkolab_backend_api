@@ -35,7 +35,7 @@ class parcelTest extends TestCase
      */
     protected function getDataSet()
     {
-        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test_2.xml');
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../paczkolab_test.xml');
     }
 
     public function setUp()
