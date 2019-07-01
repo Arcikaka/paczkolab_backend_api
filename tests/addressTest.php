@@ -53,9 +53,8 @@ class addressTest extends TestCase
         $address->setFlat('24');
         $address->save();
 
-        $id = $address->getId();
 
-        $addressTest = Address::load($id);
+        $addressTest = Address::load(2);
 
         $this->assertEquals($address->getCity(),$addressTest->getCity());
         $this->assertEquals($address->getCode(),$addressTest->getCode());
@@ -83,10 +82,9 @@ class addressTest extends TestCase
         $address->setFlat('24');
         $address->save();
 
-        $id = $address->getId();
         $address->delete();
 
-        $addressTest = Address::load($id);
+        $addressTest = Address::load(3);
 
         $this->assertNotEquals($address->getCity(),$addressTest->getCity());
         $this->assertNotEquals($address->getCode(),$addressTest->getCode());

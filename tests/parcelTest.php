@@ -50,7 +50,7 @@ class parcelTest extends TestCase
         $parcel = new Parcel();
         $parcel->setSizeId(1);
         $parcel->setUserId(1);
-        $parcel->setAddressId(2);
+        $parcel->setAddressId(1);
         $parcel->save();
 
         $parcelTest = Parcel::load(2);
@@ -65,7 +65,7 @@ class parcelTest extends TestCase
         $parcel = Parcel::load(2);
         $this->assertEquals(1,$parcel->getSizeId());
         $this->assertEquals(1,$parcel->getUserId());
-        $this->assertEquals(2,$parcel->getAddressId());
+        $this->assertEquals(1,$parcel->getAddressId());
 
     }
 
@@ -77,10 +77,10 @@ class parcelTest extends TestCase
 
         $this->assertEquals(2,$parcel->getSizeId());
         $this->assertEquals(1,$parcel->getUserId());
-        $this->assertEquals(2,$parcel->getAddressId());
+        $this->assertEquals(1,$parcel->getAddressId());
         $this->assertEquals(1,$parcel2->getSizeId());
         $this->assertEquals(1,$parcel2->getUserId());
-        $this->assertEquals(2,$parcel2->getAddressId());
+        $this->assertEquals(1,$parcel2->getAddressId());
 
     }
 

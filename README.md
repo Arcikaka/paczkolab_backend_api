@@ -35,7 +35,7 @@ In User:
 		<field name="name">John</field>
 		<field name="surname">Marston</field>
 		<field name="credits">15.00</field>
-		<field name="addressId">2</field>
+		<field name="addressId">1</field>
 	</row>
 	</table_data>
 
@@ -47,7 +47,7 @@ And in Parcel:
 		<field name="id">1</field>
 		<field name="userId">1</field>
 		<field name="sizeId">2</field>
-		<field name="addressId">2</field>
+		<field name="addressId">1</field>
 	</row>
 	</table_data>
 

@@ -81,7 +81,7 @@ class userTest extends TestCase
         $this->assertEquals('John',$user->getName());
         $this->assertEquals('Marston',$user->getSurname());
         $this->assertEquals(15.00,$user->getCredits());
-        $this->assertEquals(2,$user->getAddressId());
+        $this->assertEquals(1,$user->getAddressId());
 
     }
 
@@ -94,7 +94,7 @@ class userTest extends TestCase
         $this->assertEquals('John',$user->getName());
         $this->assertEquals('Marston',$user->getSurname());
         $this->assertEquals(15.00,$user->getCredits());
-        $this->assertEquals(2,$user->getAddressId());
+        $this->assertEquals(1,$user->getAddressId());
         $this->assertEquals('Andrzej',$user2->getName());
         $this->assertEquals('Sapkowski',$user2->getSurname());
         $this->assertEquals(22.00,$user2->getCredits());
@@ -103,7 +103,6 @@ class userTest extends TestCase
 
     public function testDeleteUser()
     {
-        $this->markTestIncomplete();
         $user = User::load(2);
         $user->delete();
 
