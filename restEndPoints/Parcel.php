@@ -2,6 +2,10 @@
 
 
 Parcel::setDb(new DBmysql());
+User::setDb(new DBmysql());
+Size::setDb(new DBmysql());
+Address::setDb(new DBmysql());
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $response = Parcel::loadAll();

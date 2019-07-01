@@ -120,7 +120,7 @@ class Parcel implements Action, JsonSerializable
     /**
      * @param int $sizeId
      */
-    public function setSizeId(int $sizeId): void
+    public function setSizeId(int $sizeId)
     {
         $this->sizeId = $sizeId;
     }
@@ -136,7 +136,7 @@ class Parcel implements Action, JsonSerializable
     /**
      * @param int $userId
      */
-    public function setUserId(int $userId): void
+    public function setUserId(int $userId)
     {
         $this->userId = $userId;
     }
@@ -152,7 +152,7 @@ class Parcel implements Action, JsonSerializable
     /**
      * @param int $addressId
      */
-    public function setAddressId(int $addressId): void
+    public function setAddressId(int $addressId)
     {
         $this->addressId = $addressId;
     }

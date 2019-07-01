@@ -128,7 +128,7 @@ class User implements Action, JsonSerializable
     /**
      * @param string $name
      */
-    public function setName(string $name):void
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -144,7 +144,7 @@ class User implements Action, JsonSerializable
     /**
      * @param string $surname
      */
-    public function setSurname(string $surname): void
+    public function setSurname(string $surname)
     {
         $this->surname = $surname;
     }
@@ -160,7 +160,7 @@ class User implements Action, JsonSerializable
     /**
      * @param int $credits
      */
-    public function setCredits(int $credits): void
+    public function setCredits(int $credits)
     {
         $this->credits = $credits;
     }
@@ -176,7 +176,7 @@ class User implements Action, JsonSerializable
     /**
      * @param int $addressId
      */
-    public function setAddressId(int $addressId): void
+    public function setAddressId(int $addressId)
     {
         $this->addressId = $addressId;
     }
