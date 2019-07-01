@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
 -- Host: localhost    Database: paczkolab
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	5.7.26-0ubuntu0.19.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `Address` (
   `street` varchar(40) NOT NULL,
   `flat` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,40 @@ CREATE TABLE `Address` (
 
 LOCK TABLES `Address` WRITE;
 /*!40000 ALTER TABLE `Address` DISABLE KEYS */;
+INSERT INTO `Address` VALUES (2,'Poznan','62-100','Doznan','201');
 /*!40000 ALTER TABLE `Address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Parcel`
+--
+
+DROP TABLE IF EXISTS `Parcel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Parcel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `sizeId` int(11) NOT NULL,
+  `addressId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `addressId` (`addressId`),
+  KEY `userId` (`userId`),
+  KEY `sizeId` (`sizeId`),
+  CONSTRAINT `Parcel_ibfk_1` FOREIGN KEY (`addressId`) REFERENCES `Address` (`id`),
+  CONSTRAINT `Parcel_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+  CONSTRAINT `Parcel_ibfk_3` FOREIGN KEY (`sizeId`) REFERENCES `Size` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Parcel`
+--
+
+LOCK TABLES `Parcel` WRITE;
+/*!40000 ALTER TABLE `Parcel` DISABLE KEYS */;
+INSERT INTO `Parcel` VALUES (2,1,1,2);
+/*!40000 ALTER TABLE `Parcel` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -51,9 +84,9 @@ DROP TABLE IF EXISTS `Size`;
 CREATE TABLE `Size` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `size` char(2) NOT NULL,
-  `price` decimal(5,2) DEFAULT NULL,
+  `price` decimal(5,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,8 +95,37 @@ CREATE TABLE `Size` (
 
 LOCK TABLES `Size` WRITE;
 /*!40000 ALTER TABLE `Size` DISABLE KEYS */;
-INSERT INTO `Size` VALUES (1,'S',8.00),(2,'M',12.00);
+INSERT INTO `Size` VALUES (1,'S',8.00),(2,'M',12.00),(3,'XL',20.00),(4,'XZ',22.00);
 /*!40000 ALTER TABLE `Size` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `User`
+--
+
+DROP TABLE IF EXISTS `User`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `User` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `surname` varchar(20) NOT NULL,
+  `credits` decimal(5,2) NOT NULL,
+  `addressId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `addressId` (`addressId`),
+  CONSTRAINT `User_ibfk_1` FOREIGN KEY (`addressId`) REFERENCES `Address` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (1,'John','Marston',15.00,2);
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -75,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-17 15:56:20
+-- Dump completed on 2019-07-01 16:50:55
