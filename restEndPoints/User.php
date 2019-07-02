@@ -16,10 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     parse_str(file_get_contents("php://input"), $patchVars);
 
     $user = User::load($patchVars['id']);
-    $user->setName($_POST['name']);
-    $user->setSurname($_POST['surname']);
-    $user->setCredits($_POST['credits']);
-    $user->setAddressId($_POST['address_id']);
+    $user->setName($patchVars['name']);
+    $user->setSurname($patchVars['surname']);
+    $user->setCredits($patchVars['credits']);
     $user->update();
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {

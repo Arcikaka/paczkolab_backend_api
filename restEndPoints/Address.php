@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     parse_str(file_get_contents("php://input"), $patchVars);
 
     $address = Address::load($patchVars['id']);
-    $address->setCity($_POST['city']);
-    $address->setCode($_POST['code']);
-    $address->setStreet($_POST['street']);
-    $address->setFlat($_POST['flat']);
+    $address->setCity($patchVars['city']);
+    $address->setCode($patchVars['code']);
+    $address->setStreet($patchVars['street']);
+    $address->setFlat($patchVars['flat']);
     $address->update();
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {

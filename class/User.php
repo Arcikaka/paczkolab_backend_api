@@ -41,7 +41,7 @@ class User implements Action, JsonSerializable
 
     public function update()
     {
-        self::$db->query("UPDATE User SET name=:name, surname=:surname, credits=:credits, addressId=:addressId WHERE  id=:id");
+        self::$db->query("UPDATE User SET name=:name, surname=:surname, credits=:credits, addressId=:addressId WHERE id=:id");
         self::$db->bind('id', $this->id);
         self::$db->bind('name', $this->name);
         self::$db->bind('surname', $this->surname);
