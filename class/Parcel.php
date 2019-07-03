@@ -36,7 +36,7 @@ class Parcel implements Action, JsonSerializable
 
     public function update()
     {
-        self::$db->query("UPDATE  Parcel SET userId=:userId, sizeId=:sizeId, addressId=:addressId WHERE id=:id");
+        self::$db->query("UPDATE Parcel SET userId=:userId, sizeId=:sizeId, addressId=:addressId WHERE id=:id");
         self::$db->bind('id', $this->id);
         self::$db->bind('userId', $this->userId);
         self::$db->bind('sizeId', $this->sizeId);

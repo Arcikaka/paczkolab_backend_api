@@ -27,6 +27,11 @@ class User implements Action, JsonSerializable
      */
     private $addressId;
 
+    public function __construct()
+    {
+        $this->id = -1;
+    }
+
     public function save()
     {
         self::$db->query("INSERT INTO User SET name=:name, surname=:surname, credits=:credits, addressId=:addressId");
@@ -36,7 +41,6 @@ class User implements Action, JsonSerializable
         self::$db->bind('addressId', $this->addressId);
         self::$db->execute();
 
-        $this->id = self::$db->lastInsertId();
     }
 
     public function update()
@@ -52,7 +56,7 @@ class User implements Action, JsonSerializable
 
     public function delete()
     {
-        self::$db->query("DELETE FROM User WHERE id = :id");
+        self::$db->query("DELETE FROM User WHERE id=:id");
         self::$db->bind('id', $this->id);
         self::$db->execute();
     }
