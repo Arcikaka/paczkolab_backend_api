@@ -34,7 +34,7 @@ class Size implements Action, JsonSerializable
         self::$db->bind('price', $this->price);
         self::$db->execute();
 
-
+        $this->id = self::$db->lastInsertId();
     }
 
     public function update()

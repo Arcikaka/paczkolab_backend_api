@@ -1,8 +1,13 @@
 {
-    "require": {
-        "phpunit/dbunit": "^4.0",
-        "phpunit/phpunit": "^7.0",
-      "ext-pdo": "*",
-      "ext-json": "*"
-    }
+  "require": {
+    "phpunit/dbunit": "^4.0",
+    "phpunit/phpunit": "^7.0",
+    "ext-pdo": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "class/"
+    ]
+  }
 }
