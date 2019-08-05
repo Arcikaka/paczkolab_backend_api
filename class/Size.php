@@ -28,7 +28,6 @@ class Size implements Action, JsonSerializable
 
     public function save()
     {
-        //tworzymy szablon zapytania
         self::$db->query("INSERT INTO Size SET size=:size, price=:price");
         self::$db->bind('size', $this->size);
         self::$db->bind('price', $this->price);
@@ -73,9 +72,8 @@ class Size implements Action, JsonSerializable
 
     public static function loadAll()
     {
-        //wywolujemy metody z klasy DBmysql poniewaz to ona jest nakladka na PDO i ma odpowiednia implementacje metod PDO
         self::$db->query("SELECT * FROM Size");
-        $sizes = self::$db->resultSet();//to jest tablica z wierszami Size z bazy
+        $sizes = self::$db->resultSet();
         $result = [];
         foreach ($sizes as $size) {
             $new = new Size();
@@ -84,7 +82,7 @@ class Size implements Action, JsonSerializable
             $new->price = $size['price'];
             $result[] = $new;
         }
-        return $result;//zwracamy tablice obiektow Size
+        return $result;
     }
 
     public static function setDb(Database $db)
@@ -101,7 +99,6 @@ class Size implements Action, JsonSerializable
      */
     public function jsonSerialize()
     {
-        //to co zwraca ta metoda jest przekazywane jako argument json_encode gdy do json_encode dodamy obiekt klasy Size
         return [
             'id' => $this->id,
             'size' => $this->size,

@@ -1,10 +1,9 @@
-<img alt="Logo" src="http://coderslab.pl/svg/logo-coderslab.svg" width="400">
+# Simple RestApi #
 
-# PHP Paczkolab 4
+Paczkolab_PHP is simple RestApi to connect with database and sent back all information to frontEnd with
+JsonSerialize.
 
-
-
-
+This was a task in Coderslab PHP course.
 # Tests #
 
 Tests that I make to check if my code works well with database are very simple and can be
@@ -64,4 +63,3 @@ Address:
 	</table_data>
 
 
-Sequence of the test is very important!!

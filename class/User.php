@@ -83,9 +83,8 @@ class User implements Action, JsonSerializable
 
     public static function loadAll()
     {
-        //wywolujemy metody z klasy DBmysql poniewaz to ona jest nakladka na PDO i ma odpowiednia implementacje metod PDO
         self::$db->query("SELECT * FROM User");
-        $users = self::$db->resultSet();//to jest tablica z wierszami Size z bazy
+        $users = self::$db->resultSet();
         $result = [];
         foreach ($users as $user) {
             $new = new User();

@@ -72,9 +72,8 @@ class Parcel implements Action, JsonSerializable
 
     public static function loadAll()
     {
-        //wywolujemy metody z klasy DBmysql poniewaz to ona jest nakladka na PDO i ma odpowiednia implementacje metod PDO
         self::$db->query("SELECT * FROM Parcel");
-        $parcels = self::$db->resultSet();//to jest tablica z wierszami Size z bazy
+        $parcels = self::$db->resultSet();
         $result = [];
         foreach ($parcels as $parcel) {
             $new = new Parcel();

@@ -3,7 +3,7 @@
 Address::setDb(new DBmysql());
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $response = Address::loadAll(); //pobieramy wszystkie rozmiary
+    $response = Address::loadAll();
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = new Address();
     $address->setCity($_POST['city']);
@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $address->save();
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-    //to jest """$_POST['Patch']"""
     parse_str(file_get_contents("php://input"), $patchVars);
 
     $address = Address::load($patchVars['id']);
@@ -24,9 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $address->update();
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    //to jest """$_POST['Delete']"""
     parse_str(file_get_contents("php://input"), $deleteVars);
-    //pobieramy obiekt size o podanym id
     $address = Address::load($deleteVars['id']);
     $address->delete();
 } else {

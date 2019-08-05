@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user->setAddressId($_POST['address_id']);
     $user->save();
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-    //to jest """$_POST['Patch']"""
     parse_str(file_get_contents("php://input"), $patchVars);
 
     $user = User::load($patchVars['id']);
@@ -22,9 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user->update();
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    //to jest """$_POST['Delete']"""
     parse_str(file_get_contents("php://input"), $deleteVars);
-    //pobieramy obiekt size o podanym id
     $user = User::load($deleteVars['id']);
     $user->delete();
 } else {

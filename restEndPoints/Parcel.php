@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-    //to jest """$_POST['Patch']"""
     parse_str(file_get_contents("php://input"), $patchVars);
 
     $parcel = Parcel::load($patchVars['id']);
@@ -37,9 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $parcel->update();
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    //to jest """$_POST['Delete']"""
     parse_str(file_get_contents("php://input"), $deleteVars);
-    //pobieramy obiekt size o podanym id
     $user = Parcel::load($deleteVars['id']);
     $user->delete();
 } else {
